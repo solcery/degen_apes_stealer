@@ -52,7 +52,7 @@ export const HomeView = () => {
         var row = table.insertRow(i)
         for (let j = 0; j < ROW_SIZE; j++) {
           var apeIndex =  i * ROW_SIZE + j;
-          var ape = apes[apeIndex];
+          const ape = ''+ apes[apeIndex];
           var arweaveUrl = "https://arweave.net/" + ape
           var response = await axios.get(arweaveUrl) 
           var cell = row.insertCell(j)
@@ -62,7 +62,7 @@ export const HomeView = () => {
           var img = document.createElement('img') as HTMLImageElement
           img.src = imglink
           img.setAttribute('style', "height:150px;width:150px;"); 
-          img.onclick = function() { console.log('ONCLICK'); mintApe(ape); };
+          img.onclick = function() { mintApe(ape); };
           cell.appendChild(img);
         }
       }
@@ -70,8 +70,6 @@ export const HomeView = () => {
   }
 
   const mintApe = async (ape: string) => {
-    console.log('mintApe')
-    console.log(wallet)
     if (wallet === undefined) {
       return;
     }
@@ -80,7 +78,7 @@ export const HomeView = () => {
       return;
     }
 
-
+    console.log(ape)
     var apeUrl = "https://arweave.net/" + ape;
     const response = await axios.get(apeUrl);
     var data = response.data
